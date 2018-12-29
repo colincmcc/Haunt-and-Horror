@@ -6,6 +6,5 @@ export const dev = {
 
 }
 
-export const prod = { graphQLEndpoint: "https://iph.colinmac.me/graphql/",
-wpEndpoint: "https://iph.colinmac.me/wp-json/wp/v2", websiteHome: "https://iph.colinmac.me",
-coinbaseCommerceUrl: "https://api.commerce.coinbase.com" };
+export const prod = { graphQLEndpoint: "https://hauntandhorror.com/graphql/",
+wpEndpoint: "https://hauntandhorror.com/wp-json/wp/v2", websiteHome: "https://hauntandhorror.com"};

@@ -1,20 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 function DashboardComponent() {
 
-  logout = () => {
 
-  }
   return (
-    <Dashboard>
-
-    </Dashboard>
-  )
+    <Dashboard />
+  );
 }
 
-export default DashboardComponent
+export default DashboardComponent;
 
 const Dashboard = styled.section`
 
 `
+;

@@ -17,6 +17,7 @@ import irohaResolvers from './resolvers/irohaResolvers';
 import appResolvers from './resolvers/appResolvers';
 
 require('dotenv').config();
+require('dotenv').config();
 
 // TODO: set network/graphql error response
 // TODO: complete typeDefs
@@ -63,13 +64,13 @@ const typeDefs = `
 // * GRAPHQL LINK SETUP
 
 const wsLink = new WebSocketLink({
-  uri: process.env.WEBSOCKET_ENDPOINT,
+  uri: 'ws://localhost:4000/graphql',
   options: {
     reconnect: true,
   },
 });
 const httpLink = new HttpLink({
-  uri: process.env.GRAPHQL_ENDPOINT,
+  uri: 'http://localhost:4000/graphql',
 });
 
 // Send queries to http server and subscriptions to websocket

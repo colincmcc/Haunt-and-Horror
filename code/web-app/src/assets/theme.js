@@ -10,7 +10,7 @@ const sizes = {
 };
 
 const colors = {
-  theme: '#F6C120',
+  theme: '#f00000',
   darkTheme: '#5b470c',
   lightTheme: '#F6E420',
   lightAccent: '#F69C20',

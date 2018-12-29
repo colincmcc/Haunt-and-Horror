@@ -9,8 +9,11 @@ import { LoadingComponent, ErrorComponent, asyncComponent } from './ui/component
 import './App.css';
 import theme from './assets/theme';
 
+require('dotenv').config();
 
-const AsyncDashboard = asyncComponent(() => import('./ui/dashboard/DashboardComponent'));
+
+// const AsyncDashboard = asyncComponent(() => import('./ui/dashboard/DashboardComponent'));
+const AsyncHome = asyncComponent(() => import('./ui/home/HomeContainer'));
 
 
 const SCHEMA_VERSION = '1';
@@ -19,16 +22,7 @@ const SCHEMA_VERSION_KEY = 'apollo-schema-version';
 
 const CACHED_STATE = gql`
   {
-    currentLocation @client
-    allLocations {
-    title {
-      rendered
-    }
-    acf {
-      loc_num
-      loc_symbol
-    }
-  }
+    isConnected @client
   }
 `;
 
@@ -74,6 +68,8 @@ class App extends Component {
   }
 
   render() {
+    console.log(process.env.WEBSOCKET_ENDPOINT);
+
     const { client, loaded } = this.state;
     const { location } = this.props;
 
@@ -95,13 +91,13 @@ class App extends Component {
               return (
                 <div>
                   <Switch location={isModal ? this.previousLocation : location}>
-                    <Route exact path="/" component={AsyncDashboard} />
+                    <Route exact path="/" component={AsyncHome} />
 
-                    <Route path="/Home" component={AsyncDashboard} />
+                    <Route path="/Home" component={AsyncHome} />
 
                   </Switch>
 
-                  {isModal ? <Route component={AsyncDashboard} path="/:section*/#Menu" /> : null}
+                  {isModal ? <Route component={AsyncHome} path="/:section*/#Menu" /> : null}
                 </div>
               );
             }
