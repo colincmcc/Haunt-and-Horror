@@ -10,10 +10,7 @@ require('dotenv').config();
 // ! TypeComposer can not add subscriptions to type yet
 
 const baseUrl = prod.wpEndpoint;
-const coinbaseEndpoint = prod.coinbaseCommerceUrl;
-const coinbaseKey = process.env.COINBASE_KEY;
-const coinbaseSecret = process.env.COINBASE_SECRET;
-const coinbaseApiVersion = process.env.COINBASE_API_VER;
+
 
 
 /**
@@ -81,102 +78,15 @@ export function createFindByMetaResolver(tc, urlAddr, metaType) {
   });
 }
 
-
-/**
- * *COINBASE RESOLVER FUNCTIONS
- */
-const coinbaseInstance = axios.create({
-  baseURL: coinbaseEndpoint,
-  timeout: 5000,
-  headers: {
-    'X-CC-Api-Key': `${coinbaseKey}`,
-    'X-CC-Version': `${coinbaseApiVersion}`,
-    'Content-Type': 'application/json'
-  }
-});
-
-// * Find all Coinbase events
-export function createFindAllCbResolver(tc, urlAddr) {
+// * Find all of a post type with a given meta value
+export function createFindBySpecificMetaResolver(tc, urlAddr) {
   tc.addResolver({
-    name: 'findAllCb',
+    name: 'findBySpecificMeta',
     type: [tc],
     args: {
+      metaType: 'String!',
+      metaValue: 'String!'
     },
-    resolve: async ({ context }) => {
-      const responseData = coinbaseInstance.get(`/${urlAddr}`).then(response => response.data.data).catch((error) => {
-        // handle error
-        console.log(error);
-      });
-      return await responseData;
-    }
-  });
-}
-
-// * Find a Coinbase event based on id
-export function createFindCbByIdResolver(tc, urlAddr) {
-  tc.addResolver({
-    name: 'findCbById',
-    type: tc,
-    args: {
-      id: 'String!'
-    },
-    resolve: async ({ args, context }) => {
-      const responseData = coinbaseInstance
-        .get(`/${urlAddr}/${args.id}`)
-        .then(response => response.data.data)
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-      return await responseData;
-    }
-  });
-}
-
-// * Create Coinbase event
-export function createCreateCbResolver(tc, urlAddr) {
-  tc.addResolver({
-    name: 'createCb',
-    type: tc,
-    args: {
-      name: 'String',
-      description: 'String',
-      amount: 'String',
-      pricingType: 'String',
-      custId: 'String',
-      custName: 'String'
-    },
-    resolve: async ({ args, context }) => {
-      const data = {
-        name: args.name,
-        description: args.description,
-        local_price: {
-          amount: args.amount,
-          currency: 'USD'
-        },
-        pricing_type: args.pricingType,
-        metadata: {
-          customer_id: args.custId,
-          customer_name: args.custName
-        }
-      };
-
-      const responseData = coinbaseInstance.post(`/${urlAddr}`, data).then(response => response.data.data).catch((error) => {
-        // handle error
-        console.log(error);
-      });
-      return await responseData;
-    }
-  });
-}
-
-// * Coinbase webhook subscriptions
-export function createSubEventUpdatedResolver(tc) {
-  tc.addResolver({
-    kind: 'subscription',
-    name: 'subEventUpdated',
-    type: tc,
-    resolve: payload => payload.chargeUpdated,
-    subscribe: () => pubsub.asyncIterator('CHARGE_UPDATED')
+    resolve: ({ args, context }) => context.loader.load(`${baseUrl}/${urlAddr}?${args.metaType}=${args.metaValue}`)
   });
 }

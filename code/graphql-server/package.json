@@ -1,5 +1,5 @@
 {
-    "name": "iph-graphql",
+    "name": "haunt-graphql",
     "version": "1.0.0",
     "description": "GraphQL Server for Multiple API's",
     "dependencies": {

@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #252525;
+  background-color: #F4EDDC;
   text-align: center;
   overflow-x: hidden;
   min-width: 320px;
@@ -16,9 +16,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.fa {
+  vertical-align: middle !important;
+}
+svg {
+  fill: currentColor;
 }

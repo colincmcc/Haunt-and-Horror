@@ -63,16 +63,19 @@ const typeDefs = `
   `;
 // * GRAPHQL LINK SETUP
 
+/*
 const wsLink = new WebSocketLink({
   uri: 'ws://localhost:4000/graphql',
   options: {
     reconnect: true,
   },
 });
+*/
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql',
 });
 
+// NOTE: split is unused until websockets are needed
 // Send queries to http server and subscriptions to websocket
 const withSplit = split(
   // split based on operation type
@@ -80,7 +83,6 @@ const withSplit = split(
     const { kind, operation } = getMainDefinition(query);
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
-  wsLink,
   httpLink,
 );
 
@@ -105,7 +107,7 @@ export const apolloClient = new ApolloClient({
   link: ApolloLink.from([
     withError,
     withState,
-    withSplit,
+    httpLink,
   ]),
   cache,
 });

@@ -10,12 +10,13 @@ const sizes = {
 };
 
 const colors = {
-  theme: '#f00000',
+  theme: '#D50001',
   darkTheme: '#5b470c',
-  lightTheme: '#F6E420',
+  tealTheme: '#00889B',
+  pinkTheme: '#E80C7A',
   lightAccent: '#F69C20',
   darkAccent: '#463217',
-  blackTheme: '#110C02',
+  blackTheme: '#080607',
   whiteTheme: '#F4EDDC',
   darkGray: '#1d1e22',
   yellowGray: '#d7d5cd',
@@ -144,12 +145,139 @@ color: ${colors.whiteTheme};
 
 };
 
+const material = {
+  root: {
+    color: '#F4EDDC',
+    ...fontStyles.text,
+  },
+  tabRoot: {
+    color: '#F4EDDC',
+    ...fontStyles.text,
+
+  },
+  navTabRoot: {
+    color: '#F4EDDC',
+    ...fontStyles.text,
+    minWidth: '100px',
+
+    '@media(min-width: 1800px)': {
+      minWidth: '160px',
+    },
+  },
+  tabSelected: {
+    color: colors.lightAccent,
+  },
+  navTabsRoot: {
+    flexGrow: 1,
+
+  },
+  tabsRoot: {
+    flexGrow: 1,
+    margin: 'auto',
+    maxWidth: '100%',
+  },
+  indicator: {
+    backgroundColor: colors.pinkTheme,
+  },
+
+  bottomNavRoot: {
+    width: '100%',
+    backgroundColor: colors.blackTheme,
+  },
+  bottomActionRoot: {
+    color: colors.whiteTheme,
+
+    minWidth: '35px',
+
+  },
+  bottomActionSelected: {
+    color: `${colors.pinkTheme}!important`,
+
+  },
+  buttonRoot: {
+    color: `${colors.lightAccent}!important`,
+    ...fontStyles.text,
+
+  },
+  buttonDisabled: {
+    backgroundColor: `${colors.yellowGray}!important`,
+  },
+  homeButton: {
+    ...fontStyles.medium,
+    color: `${colors.blackTheme}!important`,
+    backgroundColor: colors.lightAccent,
+    '&:hover': {
+      backgroundColor: colors.yellowGray,
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {
+        backgroundColor: colors.yellowGray,
+      },
+    },
+  },
+  buttonColorPrimary: {
+    color: colors.lightAccent,
+  },
+  paperRoot: {
+    color: colors.blackTheme,
+    minHeight: '100px',
+    maxWidth: '1060px',
+    backgroundColor: '#F4EDDC',
+    margin: 'auto',
+    boxShadow: '0 50px 100px #5b470c1A, 0 15px 35px #5b470c26, 0 5px 15px rgba(0,0,0,0.1)',
+
+  },
+  swipeableBottomMenuRoot: {
+    color: colors.blackTheme,
+    backgroundColor: colors.whiteTheme,
+    ...fontStyles.text,
+
+    '@media(orientation: landscape)': {
+      height: '100vh',
+    },
+  },
+  swipeableSideMenuRoot: {
+    color: colors.blackTheme,
+    height: '100vh',
+    backgroundColor: colors.whiteTheme,
+    width: '320px',
+  },
+  swipeableMenuList: {
+    height: '100%',
+    backgroundColor: colors.whiteTheme,
+  },
+  avatarLarge: {
+    width: 60,
+    height: 60,
+    margin: 10,
+  },
+  eventCard: {
+    width: 345,
+    color: colors.blackTheme,
+    marginLeft: 16,
+    display: 'inline-block',
+    backgroundColor: colors.whiteTheme,
+    minHeight: 490,
+    position: 'relative',
+
+
+  },
+  eventMedia: {
+    height: 0,
+    paddingTop: '56.25%',
+  },
+  eventList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+  },
+};
 const theme = {
   media,
   colors,
   fontSizes,
   fontStyles,
   components: styledComponents,
+  materialUI: material
 };
 
 export default theme;

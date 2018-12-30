@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { ApolloProvider, Query } from 'react-apollo';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import gql from 'graphql-tag';
 import { persistor, apolloClient, cacheStorage } from './data/apolloClient';
 import { LoadingComponent, ErrorComponent, asyncComponent } from './ui/components';
-
+import NavContainer from './ui/components/nav/NavContainer';
+import PostDetailContainer from './ui/postDetail/PostDetailContainer'
 import './App.css';
 import theme from './assets/theme';
 
@@ -14,7 +15,9 @@ require('dotenv').config();
 
 // const AsyncDashboard = asyncComponent(() => import('./ui/dashboard/DashboardComponent'));
 const AsyncHome = asyncComponent(() => import('./ui/home/HomeContainer'));
+const AsyncMovies = asyncComponent(() => import('./ui/movies/MovieListContainer'));
 
+const AsyncMobileMenu = asyncComponent(() => import('./ui/components/nav/mobileNav/MobileMenuContainer'));
 
 const SCHEMA_VERSION = '1';
 const SCHEMA_VERSION_KEY = 'apollo-schema-version';
@@ -22,7 +25,9 @@ const SCHEMA_VERSION_KEY = 'apollo-schema-version';
 
 const CACHED_STATE = gql`
   {
-    isConnected @client
+    networkStatus @client {
+      isConnected
+    }
   }
 `;
 
@@ -68,8 +73,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(process.env.WEBSOCKET_ENDPOINT);
-
     const { client, loaded } = this.state;
     const { location } = this.props;
 
@@ -83,8 +86,11 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Query query={CACHED_STATE}>
-            {
+          <AppWrapper>
+            <NavContainer />
+
+            <Query query={CACHED_STATE}>
+              {
             ({ loading, error }) => {
               if (loading) return <LoadingComponent />;
               if (error) return <ErrorComponent />;
@@ -94,16 +100,18 @@ class App extends Component {
                     <Route exact path="/" component={AsyncHome} />
 
                     <Route path="/Home" component={AsyncHome} />
-
+                    <Route exact path="/Movies" component={AsyncMovies} />
+                    <Route path="/Movies/:id" component={PostDetailContainer} />
                   </Switch>
 
-                  {isModal ? <Route component={AsyncHome} path="/:section*/#Menu" /> : null}
+                  {isModal ? <Route component={AsyncMobileMenu} path="/:section*/#Menu" /> : null}
                 </div>
               );
             }
             }
 
-          </Query>
+            </Query>
+          </AppWrapper>
         </ThemeProvider>
       </ApolloProvider>
     );
@@ -111,3 +119,8 @@ class App extends Component {
 }
 
 export default withRouter(App);
+const AppWrapper = styled.div`
+overflow: hidden;
+background-color: ${props => props.theme.colors.whiteTheme};
+min-width: 350px;
+`;

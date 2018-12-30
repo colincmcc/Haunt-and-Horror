@@ -18,5 +18,5 @@ PageWrapper.propTypes = {
 export default PageWrapper;
 const SectionWrapper = styled.div`
   box-sizing: border-box;
-
+  overflow: hidden;
 `;

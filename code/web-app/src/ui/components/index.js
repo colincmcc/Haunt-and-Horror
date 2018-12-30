@@ -1,7 +1,9 @@
 export { default as asyncComponent } from './AsyncComponent';
-export { default as DashboardComponent } from './DashboardComponent';
 export { default as ErrorComponent } from './loading/ErrorComponent';
 export { default as FooterComponent } from './footer/FooterComponent';
+export { default as Header } from './header/Header';
+export { default as HomePostComponent } from './post/HomePostComponent';
+export { default as ImageWrapper } from './ImageWrapper';
 export { default as LoginComponent } from './LoginComponent';
 export { default as LoadingComponent } from './loading/LoadingComponent';
 export { default as PageWrapper } from './PageWrapper';

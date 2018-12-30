@@ -15,7 +15,6 @@ require('dotenv').config();
 // Migrated to ApolloServer from express-graphql
 // Better support for subscriptions
 
-const coinbaseHookSecret = process.env.COINBASE_SECRET;
 const port = process.env.PORT || 4000;
 
 
@@ -44,52 +43,7 @@ async function loadData(url) {
   return data;
 }
 
-// Validate Coinbase webhook POST requests
-function hmacValidator(req, res, next) {
-  const sig = req.headers['x-cc-webhook-signature'];
-  const hmacBuffer = new Buffer(sig, 'hex');
 
-  if (!sig) {
-    return res.status(409).json({
-      error: 'Missing Signature'
-    });
-  }
-
-  try {
-    var calculated = crypto
-      .createHmac('sha256', coinbaseHookSecret)
-      .update(req.rawBody)
-      .digest();
-  }
-  catch (e) {
-    return res.status(409).json({
-      error: 'Invalid signature'
-    });
-  }
-  var hashEquals = false;
-
-  try {
-    hashEquals = crypto.timingSafeEqual(calculated, hmacBuffer);
-  }
-  catch (e) {
-    hashEquals = false;
-  }
-  if (hashEquals) {
-    return next();
-  }
-
-  return res.status(409).json({
-    error: 'Invalid signature'
-  });
-}
-
-// This endpoint allows us to validate Coinbase POST requests
-app.post('/webhooks', hmacValidator, (req, res) => {
-  res.send('OK');
-
-  const data = req.body;
-  pubsub.publish('CHARGE_UPDATED', { chargeUpdated: data });
-});
 
 // Create Apollo Server and apply its middleware to express server
 const apolloServer = new ApolloServer({
