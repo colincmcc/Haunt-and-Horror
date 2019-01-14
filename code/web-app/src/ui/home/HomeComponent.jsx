@@ -10,7 +10,7 @@ class HomeComponent extends Component {
   render() {
     const { loading, error, posts } = this.props
 
-    if (error) return console.log(error);
+    if (error) return <ErrorComponent />;
     if (loading) return <LoadingComponent large />;
 
     return (

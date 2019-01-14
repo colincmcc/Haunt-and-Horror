@@ -17,7 +17,7 @@ const colors = {
   lightAccent: '#F69C20',
   darkAccent: '#463217',
   blackTheme: '#080607',
-  whiteTheme: '#F4EDDC',
+  whiteTheme: '#F0FFFF',
   darkGray: '#1d1e22',
   yellowGray: '#d7d5cd',
   darkBlue: '#051b3e',
@@ -29,7 +29,7 @@ const fontSizes = {
     size: '40px',
     lineHeight: '50px',
     weight: 400,
-
+    margin: '0.67em 0',
   },
   subHeading: {
     size: '22px',
@@ -53,17 +53,21 @@ const fontSizes = {
 
 const fontStyles = {
   heading: css`
-  font-size: 40px;
-  line-height: 50px;
+  font-size: 42px;
+  line-height: 1.1;
   font-weight: 800;
-  font-family: 'Gin Rough';
+  font-family: 'TT Pines';
+  margin: 0.67em 0;
+  letter-spacing: -.015em;
+  padding-top: 2px;
+  padding-bottom: 2px;
   `,
   subHeading: css`
   font-size: 24px;
   line-height: 33px;
   font-weight: 500;
   letter-spacing: .025em;
-  font-family: 'Gin Rough';
+  font-family: 'TT Pines';
   `,
   large: css`
     font-size: 24px;
@@ -150,32 +154,7 @@ const material = {
     color: '#F4EDDC',
     ...fontStyles.text,
   },
-  tabRoot: {
-    color: '#F4EDDC',
-    ...fontStyles.text,
 
-  },
-  navTabRoot: {
-    color: '#F4EDDC',
-    ...fontStyles.text,
-    minWidth: '100px',
-
-    '@media(min-width: 1800px)': {
-      minWidth: '160px',
-    },
-  },
-  tabSelected: {
-    color: colors.lightAccent,
-  },
-  navTabsRoot: {
-    flexGrow: 1,
-
-  },
-  tabsRoot: {
-    flexGrow: 1,
-    margin: 'auto',
-    maxWidth: '100%',
-  },
   indicator: {
     backgroundColor: colors.pinkTheme,
   },
@@ -199,32 +178,8 @@ const material = {
     ...fontStyles.text,
 
   },
-  buttonDisabled: {
-    backgroundColor: `${colors.yellowGray}!important`,
-  },
-  homeButton: {
-    ...fontStyles.medium,
-    color: `${colors.blackTheme}!important`,
-    backgroundColor: colors.lightAccent,
-    '&:hover': {
-      backgroundColor: colors.yellowGray,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: colors.yellowGray,
-      },
-    },
-  },
   buttonColorPrimary: {
     color: colors.lightAccent,
-  },
-  paperRoot: {
-    color: colors.blackTheme,
-    minHeight: '100px',
-    maxWidth: '1060px',
-    backgroundColor: '#F4EDDC',
-    margin: 'auto',
-    boxShadow: '0 50px 100px #5b470c1A, 0 15px 35px #5b470c26, 0 5px 15px rgba(0,0,0,0.1)',
-
   },
   swipeableBottomMenuRoot: {
     color: colors.blackTheme,
@@ -250,26 +205,6 @@ const material = {
     height: 60,
     margin: 10,
   },
-  eventCard: {
-    width: 345,
-    color: colors.blackTheme,
-    marginLeft: 16,
-    display: 'inline-block',
-    backgroundColor: colors.whiteTheme,
-    minHeight: 490,
-    position: 'relative',
-
-
-  },
-  eventMedia: {
-    height: 0,
-    paddingTop: '56.25%',
-  },
-  eventList: {
-    flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
-  },
 };
 const theme = {
   media,
@@ -277,7 +212,7 @@ const theme = {
   fontSizes,
   fontStyles,
   components: styledComponents,
-  materialUI: material
+  materialUI: material,
 };
 
 export default theme;

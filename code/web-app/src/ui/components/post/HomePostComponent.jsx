@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function HomePostComponent(props) {
-  const { title, featured_image, id} = props;
-  console.log(props)
+  const { title, featured_image, id } = props;
+  console.log(props);
   const articleObj = {
     title: title.rendered,
     bgImg: featured_image.media_details.sizes.large.source_url,
-    articleId: id
-  }
+    articleId: id,
+  };
   return (
-    <Article bg={articleObj.bgImg} >
+    <Article bg={articleObj.bgImg}>
       <Description>
         <PostWrapper>
           <PostThumb>
@@ -19,7 +19,7 @@ function HomePostComponent(props) {
           </PostThumb>
           <PostContent>
             <PostHeader>
-            <Link to={`/Movies/${articleObj.articleId}`} >{articleObj.title}</Link>
+              <Link to={`/Movies/${articleObj.articleId}`}>{articleObj.title}</Link>
             </PostHeader>
           </PostContent>
         </PostWrapper>
@@ -96,8 +96,8 @@ color: ${props => props.theme.colors.whiteTheme};
 
 const PostHeader = styled.div`
 ${props => props.theme.fontStyles.heading};
+font-style: italic;
 ${props => props.theme.media.tablet_landscape_up`
 font-size: 3.5rem;
 `};
-
 `;

@@ -1,21 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImageWrapper from '../components/ImageWrapper';
 import BioComponent from './BioComponent';
-import PostContent from './PostContent'
-;
+import PostContent from './PostContent';
+import { LoadingComponent, ErrorComponent, ImageWrapper } from '../components';
+
 function PostDetailComponent(props) {
-  const {selectedPost } = props
-console.log(selectedPost)
+  const { selectedPost, loading, error } = props;
+
+  if (error) return <ErrorComponent />;
+  if (loading) return <LoadingComponent large />;
+
   const postObj = {
     title: selectedPost.title.rendered,
     content: selectedPost.content.rendered,
-    featureImg: selectedPost.featured_image.media_details.sizes.large.source_url
-  }
+    featureImg: selectedPost.featured_image.media_details.sizes.large.source_url,
+  };
   return (
     <Article>
       <ArticleHeader>
-        <Title>{postObj.title}</Title>
+        <Title dangerouslySetInnerHTML={{ __html: postObj.title }} />
         <BioComponent />
 
       </ArticleHeader>
@@ -44,12 +47,13 @@ const ArticleHeader = styled.div`
   width: 100%;
   text-align: left;
   margin: 0 auto;
+  box-sizing: border-box;
 `;
 
 const Title = styled.h1`
 ${props => props.theme.fontStyles.heading};
 
-`
+`;
 const ArticleSubHeader = styled.div`
 
 `;

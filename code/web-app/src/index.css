@@ -1,9 +1,59 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 
+@font-face {
+  font-family: "TT Pines";
+  src: url('/font/TTPines-Regular.woff2') format(woff2),
+          url('/font/TTPines-Regular.woff') format(woff),
+          url('/font/TTPines-Regular.otf') format(otf);
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "TT Pines";
+  src:  url('/font/TTPines-Black.woff2') format(woff2),
+          url('/font/TTPines-Black.woff') format(woff),
+          url('/font/TTPines-Black.otf') format(otf);
+  font-style: normal;
+  font-weight: 800;
+}
+@font-face {
+  font-family: "TT Pines";
+  src: url('/font/TTPines-Thin.woff2') format(woff2),
+          url('/font/TTPines-Thin.woff') format(woff),
+          url('/font/TTPines-Thin.otf') format(otf);
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: "TT Pines";
+  src: url('/font/TTPines-Light.woff2') format(woff2),
+        url('/font/TTPines-Light.woff') format(woff),
+        url('/font/TTPines-Light.otf') format(otf);
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "TT Pines";
+  src: url('/font/TTPines-BlackItalic.woff2') format(woff2),
+          url('/font/TTPines-BlackItalic.woff') format(woff),
+          url('/font/TTPines-BlackItalic.otf') format(otf);
+
+  font-style: italic;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Lower-WestSide";
+  src: url('/font/Lower-WestSide.ttf') format(ttf);
+  font-style: normal;
+  font-weight: 400;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #F4EDDC;
+  background-color: #F0FFFF;
   text-align: center;
   overflow-x: hidden;
   min-width: 320px;
@@ -28,4 +78,12 @@ code {
 }
 svg {
   fill: currentColor;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+* {
+  box-sizing: border-box;
 }

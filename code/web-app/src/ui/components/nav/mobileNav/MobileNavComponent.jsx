@@ -7,7 +7,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
-  IconBars, IconEnvelope, IconHaunt, IconVhs,
+  IconBars, IconEnvelope, IconHaunt, IconVhs, IconGhost,
 } from '../../../../assets';
 import theme from '../../../../assets/theme';
 
@@ -27,6 +27,12 @@ const MobileNavComponent = (props) => {
       text: 'Movies',
       slug: 'movies',
       icon: <IconVhs width="24px" height="24px" />,
+    },
+    {
+      link: '/Haunts',
+      text: 'Haunts',
+      slug: 'haunts',
+      icon: <IconGhost width="24px" height="24px" />,
     },
     {
       link: '/Contact',

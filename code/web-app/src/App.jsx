@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { persistor, apolloClient, cacheStorage } from './data/apolloClient';
 import { LoadingComponent, ErrorComponent, asyncComponent } from './ui/components';
 import NavContainer from './ui/components/nav/NavContainer';
-import PostDetailContainer from './ui/postDetail/PostDetailContainer'
+import PostDetailContainer from './ui/postDetail/PostDetailContainer';
 import './App.css';
 import theme from './assets/theme';
 
@@ -16,6 +16,7 @@ require('dotenv').config();
 // const AsyncDashboard = asyncComponent(() => import('./ui/dashboard/DashboardComponent'));
 const AsyncHome = asyncComponent(() => import('./ui/home/HomeContainer'));
 const AsyncMovies = asyncComponent(() => import('./ui/movies/MovieListContainer'));
+const AsyncContact = asyncComponent(() => import('./ui/contact/ContactContainer'));
 
 const AsyncMobileMenu = asyncComponent(() => import('./ui/components/nav/mobileNav/MobileMenuContainer'));
 
@@ -102,6 +103,8 @@ class App extends Component {
                     <Route path="/Home" component={AsyncHome} />
                     <Route exact path="/Movies" component={AsyncMovies} />
                     <Route path="/Movies/:id" component={PostDetailContainer} />
+                    <Route path="/Contact" component={AsyncContact} />
+
                   </Switch>
 
                   {isModal ? <Route component={AsyncMobileMenu} path="/:section*/#Menu" /> : null}

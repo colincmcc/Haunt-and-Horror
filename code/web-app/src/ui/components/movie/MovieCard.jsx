@@ -1,0 +1,91 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import theme from '../../../assets/theme';
+
+const MovieCard = (props) => {
+  const {
+    classes, title, description, img,
+  } = props;
+  return (
+    <CardWrapper>
+      <Image>
+        <FeaturedImage src="data:image/jpeg;base64,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" />
+      </Image>
+      <DetailsWrapper>
+        <Title>
+Die Hard
+        </Title>
+        <Year>
+ 1988
+        </Year>
+        <Rating>
+8.6
+        </Rating>
+      </DetailsWrapper>
+    </CardWrapper>
+  );
+};
+
+export default MovieCard;
+
+const CardWrapper = styled.div`
+display: inline-block;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+flex-grow: 1;
+margin: 8px 4px 0;
+overflow: hidden;
+vertical-align: top;
+width: 96px;
+${props => props.theme.fontStyles.text};
+text-align: left;
+`;
+
+const Image = styled.div`
+  padding-bottom: 166%;
+  height: 0;
+  position: relative;
+  overflow: hidden;
+  display: block;
+`;
+const FeaturedImage = styled.img`
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+`;
+const DetailsWrapper = styled.div`
+  height: 62px;
+  min-height: 4.428em;
+  padding: 7px 8px;
+  text-overflow: ellipsis;
+`;
+
+const Title = styled.div`
+  line-height: 20px;
+  max-height: 2.857em;
+  overflow: hidden;
+  padding-bottom: 2px;
+`;
+
+const Year = styled.div`
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+
+`;
+
+const Rating = styled.div`
+
+
+`;
+
+const AddItem = styled.div`
+
+`;
